@@ -37,12 +37,16 @@ const ProfilePage = () => {
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <Box m="2rem 0" />
+          <img src={user.displayName} alt={user.name} />
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <Box m="2rem 0" />
+          <Box fontSize="2rem" fontWeight="bold" mb="1rem">
+            {user.displayName}
+          </Box>
         </Box>
       </Box>
     </Box>
