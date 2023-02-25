@@ -24,7 +24,7 @@ import{
 } from "@mui/icons-material";
 import { useDispatch,useSelector } from "react-redux";
 import {setMode, setLogout} from "state";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 
 
@@ -156,8 +156,10 @@ const Navbar = () =>{
                     }}
                     input = {<InputBase/>}
                 >
-                    <MenuItem value = {shownName}>
-                        <Typography>{shownName}</Typography>
+                    <MenuItem value={shownName}>
+                    <Typography component={Link}color = "inherit" to={`/profile/${user._id}`}>
+                        {shownName}
+                    </Typography>
                     </MenuItem>
                     <MenuItem onClick={() => {dispatch (setLogout());navigate ("/login");}} >Log Out</MenuItem>
                 </Select>
