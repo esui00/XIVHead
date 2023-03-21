@@ -14,7 +14,7 @@ const LoginPage = () =>{
             fontWeight = "bold" 
             fontSize = "32px"
             color = "primary" 
-            onClick ={() => navigate ("/")}
+            onClick ={() => navigate ("/login")}
             sx={{
                 "&:hover":{
                     color: primaryLight,

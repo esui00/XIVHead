@@ -1,18 +1,27 @@
 import express from "express";
-import {getAllComments, likeComment} from "../controllers/comments.js";
-import {verifyToken} from "../middleware/auth.js";
-import { createComment } from "../controllers/comments.js";
+import { getAllComments, createComment } from "../controllers/comments.js";
+import Comments from "../models/Comments.js";
 
 const router = express.Router();
 
-//Read
-router.get("/", verifyToken,getAllComments);
+// Read all comments
+router.get("/", getAllComments);
 
-//Update likes
-router.patch("/:id/like", verifyToken,likeComment);
+// Create a new comment
+router.post("/create", async (req, res) => {
+  const { displayName, description, pageId } = req.body;
 
-//Create
-router.get("/create", createComment);
-
+  try {
+    const newComment = new Comments({
+      displayName,
+      description,
+      pageId,
+    });
+    await newComment.save();
+    res.status(201).json(newComment);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+});
 
 export default router;

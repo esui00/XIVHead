@@ -1,24 +1,29 @@
 import mongoose from "mongoose";
 
-const commentsSchema = mongoose.Schema(
-    {
-        userId:{
-            type:String,
-            required:true,
-        },
-        displayName:{
-            type:String,
-            required:true,
-        },
-        description:String,
-        likes:{
-            type: Map,
-            of:Boolean,
-        },
+const CommentsSchema = mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
-    {timestamps:true}
+    description: {
+      type: String,
+      required: true,
+    },
+    pageId: {
+        type: String,
+        enum: ['housingpage', 'relicpage', 'jobguidepage', 'encounterpage'],
+        required: true
+      },
+  },
+  { timestamps: true }
 );
 
-const Comments = mongoose.model("Comments", commentsSchema);
+CommentsSchema.virtual("displayName").get(function() {
+  return this.user.displayName;
+});
+
+const Comments = mongoose.model("Comment", CommentsSchema);
 
 export default Comments;

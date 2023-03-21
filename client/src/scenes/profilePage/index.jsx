@@ -44,7 +44,7 @@ const ProfilePage = () => {
         >
           <Box m="2rem 0" />
           <Box fontSize="2rem" fontWeight="bold" mb="1rem">
-            {user.displayName}
+            {user.displayName} 
           </Box>
         </Box>
       </Box>

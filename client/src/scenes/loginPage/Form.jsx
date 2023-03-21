@@ -16,10 +16,10 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 
 const registerSchema = yup.object().shape({
-    displayName: yup.string().required("required"),
-    email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required"),
-});
+    displayName: yup.string().required('required'),
+    email: yup.string().email('invalid email').required('required'),
+    password: yup.string().required('required'),
+  });
 
 const loginSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
@@ -51,44 +51,57 @@ const Form = () => {
         for(let value in values){
             formData.append(value,values[value])
         }
-
-        const savedUserResponse = await fetch(
-            "http://localhost:3001/auth/register",
-            {
-                method: "POST",
-                body: formData,
-            }
-        );
-        const savedUser = await savedUserResponse.json();
-        onSubmitProps.resetForm();
-
-        if(savedUser){
-            setPageType("login");
-        }
-    };
-
-    const login = async(values, onSubmitProps) => {
-        const loggedInResponse = await fetch(
-            "http://localhost:3001/auth/login",
-            {
-                method: "POST",
-                headers: {"Content-type": "application/json"},
-                body: JSON.stringify(values),
-            }
-        );   
-        
-        const loggedIn = await loggedInResponse.json();
-        onSubmitProps.resetForm();
-        if(loggedIn){
-            dispatch(
-                setLogin({
-                    user: loggedIn.user,
-                    token: loggedIn.token,
-                })
+        try {
+            const savedUserResponse = await fetch(
+                "http://localhost:3001/auth/register",
+                {
+                    method: "POST",
+                    body: formData,
+                }
             );
-            navigate("/");
+            const savedUser = await savedUserResponse.json();
+            onSubmitProps.resetForm();
+
+            if(savedUser){
+                setPageType("login");
+            }
+        } catch (error) {
+            console.error(error);
+            onSubmitProps.setSubmitting(false);
         }
     };
+
+    const login = async (values, onSubmitProps) => {
+        try {
+          const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(values),
+          });
+      
+          if (loggedInResponse.ok) {
+            const loggedIn = await loggedInResponse.json();
+            onSubmitProps.resetForm();
+            if (loggedIn) {
+              dispatch(
+                setLogin({
+                  user: loggedIn.user,
+                  token: loggedIn.token,
+                })
+              );
+              navigate("/");
+            }
+          } else {
+            throw new Error(
+              `HTTP error! status: ${loggedInResponse.status}, message: ${await loggedInResponse.text()}`
+            );
+          }
+        } catch (error) {
+          console.error(error);
+          onSubmitProps.setSubmitting(false);
+          alert("Email or password is incorrect!");
+        }
+      };
 
     const handleFormSubmit = async(values,onSubmitProps) =>{
         if(isLogin) await login(values, onSubmitProps);
@@ -132,41 +145,7 @@ const Form = () => {
                                     error = {Boolean(touched.displayName) && Boolean(errors.displayName)}
                                     helperText = {touched.displayName && errors.displayName}
                                     sx = {{gridColumn: "span 2"}}
-                                />{/*
-                                <Box
-                                    gridColumn= "span 4"
-                                    border = {`1px solid ${palette.neutral.medium}`}
-                                    borderRadius ="5px"
-                                    p="1rem"
-                                >
-                                    <Dropzone
-                                        acceptedFiles = ".jpg,.jpeg,.png"
-                                        multiple={false}
-                                        onDrop={(acceptedFiles) =>
-                                            setFieldValue("picture",acceptedFiles[0])
-                                        }
-                                    >
-                                        {({getRootProps, getInputProps}) => (
-                                            <Box
-                                                {...getRootProps()}
-                                                border = {`2px dashed ${palette.primary.main}`}
-                                                p = "1rem"
-                                                sx = {{"&:hover": {cursor: "pointer"}}}
-                                            >
-                                                <input {...getInputProps()} />
-                                                {!values.picture ? (
-                                                    <p>Add Picture Here</p>
-                                                ) : (
-                                                    <FlexBetween>
-                                                        <Typography>{values.picture.name}</Typography>
-                                                        <EditOutlinedIcon/>
-                                                    </FlexBetween>
-                                                )}
-                                            </Box>
-                                        )}
-
-                                    </Dropzone>
-                                                </Box>*/}
+                                />
                             </>
                         )}
 
