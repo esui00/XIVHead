@@ -1,33 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import axios from "axios";
 
-function CommentsForm({ handleSubmit }) {
-  const [comment, setComment] = useState('');
+const CommentsForm = ({ setComments }) => {
+  const [comment, setComment] = useState("");
+  const [commentText, setCommentText] = useState("");
+  const [commentName, setCommentName] = useState("");
 
-  function handleChange(event) {
-    setComment(event.target.value);
-  }
-
-  function onSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    handleSubmit(comment);
-    setComment('');
-  }
+    try {
+      await axios.post('http://localhost:3001/comments/create', {
+        commentName,
+        commentText,
+      });
+      setCommentName("");
+      setCommentText("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <form onSubmit={onSubmit}>
-      <h2>Leave a comment</h2>
-      <div>
-        <label htmlFor="comment">Comment:</label>
-        <input
-          type="text"
-          id="comment"
-          value={comment}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit">Submit</button>
+    <form onSubmit={handleSubmit}>
+      <TextField
+        id="comment-field"
+        label="Add a comment"
+        value={comment}
+        onChange={(event) => setComment(event.target.value)}
+        variant="outlined"
+        fullWidth
+        margin="normal"
+      />
+      <Button variant="contained" type="submit">
+        Submit
+      </Button>
     </form>
   );
-}
+};
 
 export default CommentsForm;
