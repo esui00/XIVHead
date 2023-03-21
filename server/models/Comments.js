@@ -1,24 +1,24 @@
 import mongoose from "mongoose";
 
-const CommentsSchema = mongoose.Schema(
-  {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    pageId: {
+const CommentsSchema = new mongoose.Schema(
+    {
+      comment: {
         type: String,
-        enum: ['housingpage', 'relicpage', 'jobguidepage', 'encounterpage'],
-        required: true
+        required: true,
       },
-  },
-  { timestamps: true }
-);
+      displayname: {
+        type: String,
+        required: true,
+      },
+      pageid: {
+        type: String,
+        required: true,
+      },
+    },
+    {
+      timestamps: true,
+    }
+  );
 
 CommentsSchema.virtual("displayName").get(function() {
   return this.user.displayName;

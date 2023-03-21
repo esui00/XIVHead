@@ -12,6 +12,7 @@ router.post("/create", async (req, res) => {
   const { displayName, description, pageId } = req.body;
 
   try {
+    const id = await Comment.countDocuments() + 1; // generate new id
     const newComment = new Comments({
       displayName,
       description,
