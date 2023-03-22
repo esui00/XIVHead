@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import housing from "./ff14-housing.jpg";
 import plots from "./HousingDiscordPlots.png";
-
+import CommentsForm from "components/CommentsForm";
+import axios from "axios";
 
 const HousingPage = () => {
   const theme = useTheme();
@@ -20,25 +21,29 @@ const HousingPage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const { _id } = useSelector((state) => state.user);
   const primaryLight = theme.palette.primary.light;
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const fetchComments = async () => {
-      const response = await fetch("/comments/housingpage");
-      const data = await response.json();
-      if (response.ok) {
-        setComments(data);
-      } else {
-        console.log("Failed to fetch comments");
+      try {
+        const res = await axios.get('/comments');
+        setComments(res.data);
+      } catch (err) {
+        console.error(err);
       }
     };
     fetchComments();
   }, []);
 
-  const [comments, setComments] = useState([]);
 
-  function handleSubmit(comment) {
-    setComments([...comments, comment]);
-  }
+  const refreshComments = async () => {
+    try {
+      const res = await axios.get('/comments');
+      setComments(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <Box>
@@ -100,16 +105,16 @@ const HousingPage = () => {
         alt="discord screenshot"
         src={plots}
       /><Typography variant="h1">Comments</Typography>
-<Box sx={{ mt: "2rem" }}>
-  {comments.map((comment) => (
-    <Box key={comment._id} sx={{ mb: "2rem" }}>
-      <Typography variant="h5" fontWeight="bold">
-        {comment.name}
-      </Typography>
-      <Typography sx={{ mt: "0.5rem" }}>{comment.text}</Typography>
-    </Box>
-  ))}
-</Box>
+    <div>
+      <CommentsForm postId="housing" refreshComments={refreshComments} />
+      <hr />
+      {comments.map((comment) => (
+        <div key={comment._id}>
+          <p>{comment.comment}</p>
+          <small>{comment.date}</small>
+        </div>
+      ))}
+    </div>
 
 </Box>
 );
