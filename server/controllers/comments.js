@@ -1,25 +1,24 @@
 import Comments from "../models/Comments.js";
 import User from "../models/User.js";
 
-// Create
+/* CREATE */
 export const createComment = async (req, res) => {
-    console.log(req.body);
-    const {  displayName, description, pageId } = req.body;
+  try {
+    const { userId, description, picturePath } = req.body;
+    const user = await User.findById(userId);
+    const newPost = new Post({
+      userId,
+      firstName: user.firstName,
+      description
+    });
+    await newPost.save();
 
-  
-    try {
-      const newComment = new Comments({
-        displayName: User.displayName,
-        description,
-        pageId,
-      });
-      await newComment.save();
-      res.status(201).json(newComment);
-    } catch (error) {
-      console.log(error);
-      res.status(409).json({ message: error.message });
-    }
-  };
+    const post = await Post.find();
+    res.status(201).json(post);
+  } catch (err) {
+    res.status(409).json({ message: err.message });
+  }
+};
   
 
 //Read
