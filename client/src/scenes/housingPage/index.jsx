@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import housing from "./ff14-housing.jpg";
 import plots from "./HousingDiscordPlots.png";
-import CommentsForm from "./CommentsForm";
 
 
 const HousingPage = () => {
@@ -111,16 +110,7 @@ const HousingPage = () => {
     </Box>
   ))}
 </Box>
-{_id ? (
-  <CommentsForm onSubmit={handleSubmit} />
-) : (
-  <Box sx={{ mt: "2rem" }}>
-    <Typography variant="body1">
-      Please <Link onClick={() => navigate("/login")}>log in</Link> to
-      leave a comment.
-    </Typography>
-  </Box>
-)}
+
 </Box>
 );
 };

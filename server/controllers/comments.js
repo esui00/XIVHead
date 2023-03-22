@@ -11,10 +11,10 @@ export const createComment = async (req, res) => {
       displayName: user.displayName,
       description
     });
-    await newPost.save();
+    await newComment.save();
 
-    const post = await Comment.find();
-    res.status(201).json(Comment);
+    const comment = await Comment.find();
+    res.status(201).json(comment);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
@@ -23,7 +23,6 @@ export const createComment = async (req, res) => {
 
 //Read
 export const getAllComments = async (req, res) => {
-    const { pageId } = req.query;
     try {
       const comments = await Comments.find({ pageId }).sort({ createdAt: "desc" });
       res.status(200).json(comments);
