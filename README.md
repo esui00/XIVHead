@@ -15,3 +15,10 @@ Features to add if given enough time:
 - Search bar to find news/resource pages
 - Edit the Lodestone News API to show more news beyond the first 20
 - Implementation of another API to link FF14 character to your XIVHead Account
+
+3/28 Updates:
+- Comments collection created for each 4 webpage.
+ - Comments need to be allowed to be deleted only if the user made it
+  - Might take a lazy way out and only allow admin delete/update.
+- Email need API implementation to make sure the email is valid.
+-    
