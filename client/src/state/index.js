@@ -32,9 +32,39 @@ export const authSlice = createSlice({
       });
       state.posts = updatedPosts;
     },
+    setRelics: (state, action) => {
+        state.relics = action.payload.relics;
+      },
+      setRelic: (state, action) => {
+        const updatedRelics = state.relics.map((relic) => {
+          if (relic._id === action.payload.relic._id) return action.payload.relic;
+          return relic;
+        });
+        state.relics = updatedRelics;
+      },
+      setJobs: (state, action) => {
+        state.jobs = action.payload.jobs;
+      },
+      setJob: (state, action) => {
+        const updatedJobs = state.jobs.map((job) => {
+          if (job._id === action.payload.job._id) return action.payload.job;
+          return job;
+        });
+        state.jobs = updatedJobs;
+      },
+      setEncounters: (state, action) => {
+        state.encounters = action.payload.encounters;
+      },
+      setEncounter: (state, action) => {
+        const updatedEncounters = state.encounters.map((encounter) => {
+          if (encounter._id === action.payload.encounter._id) return action.payload.encounter;
+          return encounter;
+        });
+        state.encounters = updatedEncounters;
+      },
   },
 });
 
-export const { setMode, setLogin, setLogout,setPosts, setPost } =
+export const { setMode, setLogin, setLogout,setPosts, setPost,setRelics,setRelic, setJobs, setJob, setEncounters, setEncounter } =
   authSlice.actions;
 export default authSlice.reducer;

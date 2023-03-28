@@ -4,6 +4,8 @@ import { Link,Box, Typography,useTheme, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import relic from "./samurai.jpg";
+import RelicsWidget from "scenes/widgets/RelicsWidget";
+import MyRelicWidget from "scenes/widgets/MyRelicWidget";
 
 const RelicPage = () =>{
     const theme = useTheme();
@@ -55,6 +57,8 @@ const RelicPage = () =>{
                 </Box>
 
             </Box>
+            <MyRelicWidget></MyRelicWidget>
+            <RelicsWidget></RelicsWidget>
         </Box>
     );
 };

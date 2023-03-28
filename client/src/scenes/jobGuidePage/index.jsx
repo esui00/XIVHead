@@ -4,6 +4,10 @@ import { Link,Box, Typography,useTheme, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import jobs from "./jobs.jpg";
+import MyPostWidget from "scenes/widgets/MyPostWidget";
+import PostsWidget from "scenes/widgets/PostsWidget";
+import MyJobWidget from "scenes/widgets/MyJobWidget";
+import JobsWidget from "scenes/widgets/JobsWidget";
 
 const JobGuidePage = () =>{
     const theme = useTheme();
@@ -60,6 +64,8 @@ const JobGuidePage = () =>{
                 </Box>
 
             </Box>
+            <MyJobWidget></MyJobWidget>
+            <JobsWidget></JobsWidget>
         </Box>
     );
 };

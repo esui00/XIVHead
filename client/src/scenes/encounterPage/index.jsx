@@ -4,6 +4,10 @@ import { Link,Box, Typography,useTheme, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import carbuncle from "./carbuncle.jpg";
+import MyPostWidget from "scenes/widgets/MyPostWidget";
+import PostsWidget from "scenes/widgets/PostsWidget";
+import MyEncounterWidget from "scenes/widgets/MyEncounterWidget";
+import EncountersWidget from "scenes/widgets/EncountersWidget";
 
 const EncounterPage = () =>{
     const theme = useTheme();
@@ -60,6 +64,8 @@ const EncounterPage = () =>{
                 </Box>
 
             </Box>
+            <MyEncounterWidget></MyEncounterWidget>
+            <EncountersWidget></EncountersWidget>
         </Box>
     );
 };

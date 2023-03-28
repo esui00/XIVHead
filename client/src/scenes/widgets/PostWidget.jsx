@@ -4,13 +4,15 @@ import {
   FavoriteOutlined,
   ShareOutlined,
   DeleteOutlined,
+  EditOutlined,
 } from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "state";
+import { setPosts } from "state";
+import { Link } from "react-router-dom";
 
 const PostWidget = ({
   postId,
@@ -19,10 +21,11 @@ const PostWidget = ({
   description,
 }) => {
   const dispatch = useDispatch();
+  const [post, setPost] = useState("");
+  const { palette } = useTheme();
+  const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
-
-  const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
@@ -32,7 +35,11 @@ const PostWidget = ({
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
+    const posts = await response.json();
+    dispatch(setPosts({ posts }));
+    setPost("");
   };
+
 
   return (
     <WidgetWrapper m="2rem 0">
@@ -43,12 +50,21 @@ const PostWidget = ({
         {description}
       </Typography>
       <Divider sx={{ margin: "1.25rem 0" }} />
-      <FlexBetween gap="0.25rem">
-              <DeleteOutlined sx={{ color: main }} 
-                onClick={deletePost}
-              />
-              <Typography color={main}></Typography>
+      <>
+      <FlexBetween>
+        <DeleteOutlined
+          disabled={!post}
+          onClick={deletePost}
+          sx={{
+            color: palette.main,
+            backgroundColor: "red",
+            borderRadius: "3rem",
+          }}
+        >
+        </DeleteOutlined>
       </FlexBetween>
+
+      </>
     </WidgetWrapper>
     
   );
