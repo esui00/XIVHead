@@ -25,13 +25,13 @@ function App() {
         <ThemeProvider theme ={theme}>
           <CssBaseline/>
           <Routes>
-            <Route path = "/encounters" element = {<EncounterPage />} />
-            <Route path = "/jobs" element = {<JobGuidePage />} />
-            <Route path = "/relic" element = {<RelicPage />} />
-            <Route path = "/housing" element = {<HousingPage />} />
-            <Route path = "/" element = {<HomePage />} />
-            <Route path = "/login" element = {<LoginPage />} />
-            <Route path="/profile/:userId" element = {<ProfilePage />}></Route>
+            <Route path = "/encounters" element={isAuth ? <EncounterPage /> : <Navigate to="/" />} />
+            <Route path = "/jobs" element={isAuth ? <JobGuidePage /> : <Navigate to="/" />} />
+            <Route path = "/relic" element={isAuth ? <RelicPage /> : <Navigate to="/" />} />
+            <Route path = "/housing" element={isAuth ? <HousingPage /> : <Navigate to="/" />} />
+            <Route path = "/" element = {<LoginPage />} />
+            <Route path = "/home" element={isAuth ? <HomePage /> : <Navigate to="/" />} />
+            <Route path="/profile/:userId" element={isAuth ? <ProfilePage /> : <Navigate to="/" />}></Route>
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
