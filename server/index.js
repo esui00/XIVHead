@@ -45,6 +45,7 @@ const upload = multer({storage});
 
 /*Route with Files*/
 app.post("/auth/register", upload.single("picture"), register);
+app.post("/comments",createComment);
 
 //Routes
 app.use("/auth", authRoutes);

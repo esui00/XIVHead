@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import housing from "./ff14-housing.jpg";
 import plots from "./HousingDiscordPlots.png";
-import CommentsForm from "components/CommentsForm";
 import axios from "axios";
+import MyCommentWidget from "scenes/widgets/MyCommentWidget";
 
 const HousingPage = () => {
   const theme = useTheme();
@@ -21,29 +21,8 @@ const HousingPage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const { _id } = useSelector((state) => state.user);
   const primaryLight = theme.palette.primary.light;
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const res = await axios.get('/comments');
-        setComments(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchComments();
-  }, []);
 
 
-  const refreshComments = async () => {
-    try {
-      const res = await axios.get('/comments');
-      setComments(res.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
     <Box>
@@ -105,17 +84,7 @@ const HousingPage = () => {
         alt="discord screenshot"
         src={plots}
       /><Typography variant="h1">Comments</Typography>
-    <div>
-      <CommentsForm postId="housing" refreshComments={refreshComments} />
-      <hr />
-      {comments.map((comment) => (
-        <div key={comment._id}>
-          <p>{comment.comment}</p>
-          <small>{comment.date}</small>
-        </div>
-      ))}
-    </div>
-
+        <MyCommentWidget></MyCommentWidget>
 </Box>
 );
 };

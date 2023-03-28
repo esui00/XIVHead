@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const CommentsSchema = mongoose.Schema(
+const commentSchema = mongoose.Schema(
   {
     userId: {
       type: String,
@@ -11,18 +11,12 @@ const CommentsSchema = mongoose.Schema(
       required:true,
     },
     description: {
-      type: String,
-      required: true,
+      type: String
     },
-    pageId: {
-        type: String,
-        enum: ['housingpage', 'relicpage', 'jobguidepage', 'encounterpage'],
-        required: true
-      },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const Comments = mongoose.model("Comment", CommentsSchema);
+const Comment = mongoose.model("Comment", commentsSchema);
 
-export default Comments;
+export default Comment;

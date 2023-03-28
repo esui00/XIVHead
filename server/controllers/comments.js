@@ -1,4 +1,4 @@
-import Comments from "../models/Comments.js";
+import Comment from "../models/Comments";
 import User from "../models/User.js";
 
 /* CREATE */
@@ -24,8 +24,8 @@ export const createComment = async (req, res) => {
 //Read
 export const getAllComments = async (req, res) => {
     try {
-      const comments = await Comments.find({ pageId }).sort({ createdAt: "desc" });
-      res.status(200).json(comments);
+      const comment = await Comment.find();
+      res.status(200).json(comment);
     } catch (error) {
       res.status(404).json({ message: error.message });
     }

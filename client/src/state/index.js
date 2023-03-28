@@ -22,7 +22,7 @@ export const authSlice = createSlice({
             state.user = null;
             state.token = null;
         },
-        setcomments: (state,action) =>{
+        setComments: (state,action) =>{
             state.comments = action.payload.comments;
         },
         setComment: (state, action) =>{
@@ -35,5 +35,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const {setMode, setLogin,setLogout, setcomments,setComment} = authSlice.actions;
+export const {setMode, setLogin,setLogout, setComments,setComment} = authSlice.actions;
 export default authSlice.reducer;
