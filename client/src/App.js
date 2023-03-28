@@ -25,13 +25,13 @@ function App() {
         <ThemeProvider theme ={theme}>
           <CssBaseline/>
           <Routes>
-            <Route path = "/encounters" element={isAuth ? <EncounterPage /> : <Navigate to="/" />} />
-            <Route path = "/jobs" element={isAuth ? <JobGuidePage /> : <Navigate to="/" />} />
-            <Route path = "/relic" element={isAuth ? <RelicPage /> : <Navigate to="/" />} />
-            <Route path = "/housing" element={isAuth ? <HousingPage /> : <Navigate to="/" />} />
-            <Route path = "/" element = {<LoginPage />} />
-            <Route path = "/home" element={isAuth ? <HomePage /> : <Navigate to="/" />} />
-            <Route path="/profile/:userId" element={isAuth ? <ProfilePage /> : <Navigate to="/" />}></Route>
+            <Route path = "/encounters" element={isAuth ? <EncounterPage /> : <Navigate to="/login" />} />
+            <Route path = "/jobs" element={isAuth ? <JobGuidePage /> : <Navigate to="/login" />} />
+            <Route path = "/relic" element={isAuth ? <RelicPage /> : <Navigate to="/login" />} />
+            <Route path = "/housing" element={isAuth ? <HousingPage /> : <Navigate to="/login" />} />
+            <Route path = "/login" element = {<LoginPage />} />
+            <Route path = "/" element={isAuth ? <HomePage /> : <Navigate to="/login" />} />
+            <Route path="/profile/:userId" element={isAuth ? <ProfilePage /> : <Navigate to="/login" />}></Route>
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
