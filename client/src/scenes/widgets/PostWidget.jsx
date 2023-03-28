@@ -3,6 +3,7 @@ import {
   FavoriteBorderOutlined,
   FavoriteOutlined,
   ShareOutlined,
+  DeleteOutlined,
 } from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
@@ -25,6 +26,13 @@ const PostWidget = ({
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
+  const deletePost = async () => {
+    
+    const response = await fetch(`http://localhost:3001/posts/delete/${postId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
 
   return (
     <WidgetWrapper m="2rem 0">
@@ -34,7 +42,15 @@ const PostWidget = ({
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
+      <Divider sx={{ margin: "1.25rem 0" }} />
+      <FlexBetween gap="0.25rem">
+              <DeleteOutlined sx={{ color: main }} 
+                onClick={deletePost}
+              />
+              <Typography color={main}></Typography>
+      </FlexBetween>
     </WidgetWrapper>
+    
   );
 };
 

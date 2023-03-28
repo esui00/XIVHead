@@ -66,8 +66,6 @@ const MyPostWidget = () => {
       </FlexBetween>
 
 
-      <Divider sx={{ margin: "1.25rem 0" }} />
-
       <FlexBetween>
         <Button
           disabled={!post}
