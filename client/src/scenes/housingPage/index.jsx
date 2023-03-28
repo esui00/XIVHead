@@ -13,8 +13,8 @@ import FlexBetween from "components/FlexBetween";
 import housing from "./ff14-housing.jpg";
 import plots from "./HousingDiscordPlots.png";
 import axios from "axios";
-import MyCommentWidget from "scenes/widgets/MyPostWidget";
-import CommentsWidget from "scenes/widgets/PostsWidget";
+import MyPostWidget from "scenes/widgets/MyPostWidget";
+import PostWidget from "scenes/widgets/PostWidget";
 
 const HousingPage = () => {
   const theme = useTheme();
@@ -85,8 +85,8 @@ const HousingPage = () => {
         alt="discord screenshot"
         src={plots}
       /><Typography variant="h1">Comments</Typography>
-        <MyCommentWidget></MyCommentWidget>
-        <CommentsWidget userId={_id}></CommentsWidget>
+        <MyPostWidget></MyPostWidget>
+        <PostWidget userId={_id}></PostWidget>
 </Box>
 );
 };
