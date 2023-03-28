@@ -10,7 +10,6 @@ export const createPost = async (req, res) => {
       userId,
       displayName: user.displayName,
       description,
-      likes: {},
     });
     await newPost.save();
 

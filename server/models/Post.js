@@ -11,10 +11,6 @@ const postSchema = mongoose.Schema(
       required: true,
     },
     description: String,
-    likes: {
-      type: Map,
-      of: Boolean,
-    },
   },
   { timestamps: true }
 );

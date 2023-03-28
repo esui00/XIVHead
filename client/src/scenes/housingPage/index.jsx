@@ -15,6 +15,7 @@ import plots from "./HousingDiscordPlots.png";
 import axios from "axios";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostWidget from "scenes/widgets/PostWidget";
+import PostsWidget from "scenes/widgets/PostsWidget";
 
 const HousingPage = () => {
   const theme = useTheme();
@@ -86,7 +87,7 @@ const HousingPage = () => {
         src={plots}
       /><Typography variant="h1">Comments</Typography>
         <MyPostWidget></MyPostWidget>
-        <PostWidget userId={_id}></PostWidget>
+        <PostsWidget userId={_id}></PostsWidget>
 </Box>
 );
 };

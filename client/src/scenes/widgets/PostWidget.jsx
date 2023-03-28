@@ -28,12 +28,12 @@ const PostWidget = ({
 
   return (
     <WidgetWrapper m="2rem 0">
+      <Typography color={primary} sx={{ mt: "1rem" }}>
+        {name}
+      </Typography>
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
-      <FlexBetween mt="0.25rem">
-        
-      </FlexBetween>
     </WidgetWrapper>
   );
 };
