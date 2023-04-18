@@ -16,14 +16,14 @@ import {
   
   const EncounterWidget = ({
     encounterId,
-    encounterUserId,
+    user,
     name,
     description,
   }) => {
     const dispatch = useDispatch();
     const [encounter, setEncounter] = useState("");
     const { palette } = useTheme();
-    const { _id } = useSelector((state) => state.user);
+    const { _id, admin} = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const loggedInUserId = useSelector((state) => state.user._id);
     const main = palette.neutral.main;
@@ -52,16 +52,17 @@ import {
         <Divider sx={{ margin: "1.25rem 0" }} />
         <>
         <FlexBetween>
-          <DeleteOutlined
-            disabled={!encounter}
-            onClick={deleteEncounter}
-            sx={{
-              color: palette.main,
-              backgroundColor: "red",
-              borderRadius: "3rem",
-            }}
-          >
-          </DeleteOutlined>
+          {admin === true && (
+            <DeleteOutlined
+              disabled={!encounter}
+              onClick={deleteEncounter}
+              sx={{
+                color: palette.main,
+                backgroundColor: "red",
+                borderRadius: "3rem",
+              }}
+            />
+          )}
         </FlexBetween>
   
         </>

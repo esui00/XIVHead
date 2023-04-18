@@ -31,6 +31,7 @@ export const getFeedEncounters = async (req, res) => {
 };
 
 /*DELETE*/
+/*
 export const deleteEncounter = async (req, res) => {
   try {
     const { encounterId } = req.params;
@@ -40,4 +41,46 @@ export const deleteEncounter = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 
+};*/
+export const deleteEncounter = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+
+  try {
+    const encounter = await Encounter.findById(id);
+    if (!encounter) return res.status(404).send("Encounter not found");
+
+    // Check if the user is an admin
+const deleteEncounter = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+
+  try {
+    const encounter = await Encounter.findById(id);
+    if (!encounter) return res.status(404).send("Encounter not found");
+
+    // Check if the user is an admin
+    if (user.role === "admin") {
+      await encounter.deleteOne();
+      return res.send("Encounter deleted successfully");
+    } else {
+      return res.status(403).send("unauthorized: only admin can delete encounters");
+    }
+
+    await encounter.remove();
+
+    res.status(200).send("Encounter deleted successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
+    await encounter.remove();
+
+    res.status(200).send("Encounter deleted successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 };
