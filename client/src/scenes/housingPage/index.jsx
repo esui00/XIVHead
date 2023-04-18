@@ -28,19 +28,11 @@ const HousingPage = () => {
 
   return (
     <Box>
-      <Navbar />
-      <FlexBetween
-        display="flex"
-        flexDirection="column"
-        justifyContent="end"
-        alignItems=""
-        gap="1rem"
-      >
-        <Typography variant="h1" sx={{ mb: "1.5rem" }}>
-          Housing
-        </Typography>
-      </FlexBetween>
-      <Box
+    <Navbar/>   
+    <FlexBetween display = "flex" flexDirection = "column" justifyContent = "end" alignItems = "" gap = "1rem" >
+</FlexBetween>  
+<Typography variant = "h1" sx = {{ mb : "1.5rem"}}>Housing</Typography>
+<Box
         component="img"
         sx={{
           height: 450,
