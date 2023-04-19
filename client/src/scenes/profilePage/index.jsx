@@ -34,14 +34,12 @@ const ProfilePage = () => {
   };
 
   const deleteUser = async () => {
-      
-    const response = await fetch(`http://localhost:3001/users/delete/${userId}`, {
+    const response = await fetch(`http://localhost:3001/users/delete/${_id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
-    const users = await response.json();
-    dispatch(setUser({ users }));
-    setUser("");
+    const result = await response.json();
+    dispatch(setUser(result));
   };
 
   useEffect(() => {

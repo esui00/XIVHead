@@ -29,8 +29,8 @@ const PostWidget = ({
   const loggedInUserId = useSelector((state) => state.user._id);
   const main = palette.neutral.main;
   const primary = palette.primary.main;
-  const currentUser = useSelector((state) => state.user);
-  const isAdmin = currentUser && currentUser.admin;
+  
+
 
   const deletePost = async () => {
     

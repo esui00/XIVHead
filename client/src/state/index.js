@@ -17,6 +17,11 @@ export const authSlice = createSlice({
     setLogin: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
+      
+      // Check if user object has an `admin` property
+      if ('admin' in action.payload.user) {
+        state.user.admin = action.payload.user.admin;
+      }
     },
     setLogout: (state) => {
       state.user = null;

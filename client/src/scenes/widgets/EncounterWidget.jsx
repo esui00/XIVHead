@@ -52,7 +52,7 @@ const EncounterWidget = ({
       </Typography>
       <Divider sx={{ margin: "1.25rem 0" }} />
       <FlexBetween>
-        {admin && (
+      {admin && (
           <DeleteOutlined 
             disabled={!encounter}
             onClick={deleteEncounter}
@@ -62,7 +62,7 @@ const EncounterWidget = ({
               borderRadius: "3rem",
             }}
           />
-        )}
+      )}
       </FlexBetween>
     </WidgetWrapper>
   );
