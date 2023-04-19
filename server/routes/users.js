@@ -1,5 +1,5 @@
 import express from "express";
-import {    getUser    } from "../controllers/users.js";
+import {    getUser ,deleteUser  } from "../controllers/users.js";
 import {verifyToken} from "../middleware/auth.js";
 import newUser from '../models/User.js';
 import bcrypt from "bcrypt";
@@ -9,6 +9,8 @@ const router = express.Router();
 //Read
 router.get("/:id", verifyToken,getUser);
 
+//Delete
+router.delete("/delete/:id", deleteUser);
 //Create
 router.post("/register", async (req, res) => { 
     const { displayName, email, password} = req.body

@@ -1,12 +1,26 @@
 import { Box, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Navbar from "scenes/navbar";
+import {
+  ChatBubbleOutlineOutlined,
+  FavoriteBorderOutlined,
+  FavoriteOutlined,
+  ShareOutlined,
+  DeleteOutlined,
+  EditOutlined,
+} from "@mui/icons-material";
+import { Divider, IconButton, Typography, useTheme } from "@mui/material";
+import FlexBetween from "components/FlexBetween";
+
 
 const ProfilePage = () => {
+  const { palette } = useTheme();
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
   const { userId } = useParams();
+  const { _id, admin} = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
@@ -17,6 +31,17 @@ const ProfilePage = () => {
     });
     const data = await response.json();
     setUser(data);
+  };
+
+  const deleteUser = async () => {
+      
+    const response = await fetch(`http://localhost:3001/users/delete/${userId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const users = await response.json();
+    dispatch(setUser({ users }));
+    setUser("");
   };
 
   useEffect(() => {
@@ -47,6 +72,20 @@ const ProfilePage = () => {
             {user.displayName} 
           </Box>
         </Box>
+        <Divider sx={{ margin: "1.25rem 0" }} />
+        <FlexBetween>
+        {admin && (
+          <DeleteOutlined 
+            disabled={!user}
+            onClick={deleteUser}
+            sx={{
+              color: palette.main,
+              backgroundColor: "red",
+              borderRadius: "3rem",
+            }}
+          />
+        )}
+        </FlexBetween>
       </Box>
     </Box>
   );

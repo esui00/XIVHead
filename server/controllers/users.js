@@ -10,3 +10,16 @@ export const getUser = async(req,res) =>{
         res.status(404).json({message: error.message});
     }
 };
+
+
+/*DELETE*/
+export const deleteUser = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const user = await user.deleteOne({ UserId });
+      res.status(200).json(user);
+    } catch (err) {
+      res.status(404).json({ message: err.message });
+    }
+  
+  };

@@ -23,11 +23,13 @@ const PostWidget = ({
   const dispatch = useDispatch();
   const [post, setPost] = useState("");
   const { palette } = useTheme();
-  const { _id } = useSelector((state) => state.user);
+  const { _id, admin} = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
   const main = palette.neutral.main;
   const primary = palette.primary.main;
+  const currentUser = useSelector((state) => state.user);
+  const isAdmin = currentUser && currentUser.admin;
 
   const deletePost = async () => {
     
@@ -52,6 +54,7 @@ const PostWidget = ({
       <Divider sx={{ margin: "1.25rem 0" }} />
       <>
       <FlexBetween>
+        {admin &&(
         <DeleteOutlined
           disabled={!post}
           onClick={deletePost}
@@ -62,6 +65,7 @@ const PostWidget = ({
           }}
         >
         </DeleteOutlined>
+        )}
       </FlexBetween>
 
       </>

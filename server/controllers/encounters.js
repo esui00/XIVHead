@@ -60,7 +60,7 @@ const deleteEncounter = async (req, res) => {
     if (!encounter) return res.status(404).send("Encounter not found");
 
     // Check if the user is an admin
-    if (user.role === "admin") {
+    if (user.admin === true) {
       await encounter.deleteOne();
       return res.send("Encounter deleted successfully");
     } else {
