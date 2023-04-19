@@ -19,7 +19,7 @@ const EncounterWidget = ({
   user,
   name,
   description,
-  userId, // new prop
+  userId // Add userId prop
 }) => {
   const dispatch = useDispatch();
   const [encounter, setEncounter] = useState("");
@@ -41,11 +41,12 @@ const EncounterWidget = ({
 
   return (
     <WidgetWrapper m="2rem 0">
-      <Link to={`/profile/${userId}`}> {/* Link to the user's profile page */}
-        <Typography color={primary} sx={{ mt: "1rem" }}>
-          {name}
-        </Typography>
-      </Link>
+      {/* Use Link component to wrap the name */}
+      <Link to={`/profile/${userId}`}>
+  <Typography color={primary} sx={{ mt: "1rem" }}>
+    {name}
+  </Typography>
+</Link>
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>

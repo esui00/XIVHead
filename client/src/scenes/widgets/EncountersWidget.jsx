@@ -39,6 +39,7 @@ const EncountersWidget = ({ userId, isProfile = false }) => {
             name={`${displayName}`}
             description={description}
             admin={_id.admin}
+            userId={encounters.userId}
           />
         )
       )}
