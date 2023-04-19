@@ -19,6 +19,7 @@ import {
     relicUserId,
     name,
     description,
+    userId
   }) => {
     const dispatch = useDispatch();
     const [relic, setRelic] = useState("");
@@ -43,9 +44,11 @@ import {
   
     return (
       <WidgetWrapper m="2rem 0">
-        <Typography color={primary} sx={{ mt: "1rem" }}>
-          {name}
-        </Typography>
+      <Link to={`/profile/${userId}`}>
+  <Typography color={primary} sx={{ mt: "1rem" }}>
+    {name}
+  </Typography>
+</Link>
         <Typography color={main} sx={{ mt: "1rem" }}>
           {description}
         </Typography>

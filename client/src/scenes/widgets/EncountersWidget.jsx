@@ -35,11 +35,10 @@ const EncountersWidget = ({ userId, isProfile = false }) => {
           <EncounterWidget
             key={_id}
             encounterId={_id}
-            encounterUserId={userId}
             name={`${displayName}`}
             description={description}
             admin={_id.admin}
-            userId={encounters.userId}
+            userId={userId}
           />
         )
       )}

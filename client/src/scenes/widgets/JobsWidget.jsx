@@ -35,9 +35,9 @@ const JobsWidget = ({ userId, isProfile = false }) => {
           <JobWidget
             key={_id}
             jobId={_id}
-            jobUserId={userId}
             name={`${displayName}`}
             description={description}
+            userId={userId}
           />
         )
       )}

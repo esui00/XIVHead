@@ -35,7 +35,7 @@ const RelicsWidget = ({ userId, isProfile = false }) => {
           <RelicWidget
             key={_id}
             relicId={_id}
-            relicUserId={userId}
+            userId={userId}
             name={`${displayName}`}
             description={description}
           />

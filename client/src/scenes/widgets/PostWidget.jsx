@@ -19,6 +19,7 @@ const PostWidget = ({
   postUserId,
   name,
   description,
+  userId
 }) => {
   const dispatch = useDispatch();
   const [post, setPost] = useState("");
@@ -45,9 +46,11 @@ const PostWidget = ({
 
   return (
     <WidgetWrapper m="2rem 0">
-      <Typography color={primary} sx={{ mt: "1rem" }}>
-        {name}
-      </Typography>
+      <Link to={`/profile/${userId}`}>
+  <Typography color={primary} sx={{ mt: "1rem" }}>
+    {name}
+  </Typography>
+</Link>
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
