@@ -34,7 +34,7 @@ const ProfilePage = () => {
   };
 
   const deleteUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/delete/${_id}`, {
+    const response = await fetch(`http://localhost:3001/users/delete/${user._id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

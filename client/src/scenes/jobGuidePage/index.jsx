@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Navbar from "scenes/navbar";
-import { Link,Box, Typography,useTheme, useMediaQuery } from "@mui/material";
+import { Link,Box, Typography,useTheme, useMediaQuery,TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import jobs from "./jobs.jpg";
@@ -8,14 +8,29 @@ import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import MyJobWidget from "scenes/widgets/MyJobWidget";
 import JobsWidget from "scenes/widgets/JobsWidget";
+import { useState, useEffect } from "react";
+
 
 const JobGuidePage = () =>{
     const theme = useTheme();
     const navigate = useNavigate();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-    const {_id} = useSelector((state) => state.user); 
+    const {_id, admin} = useSelector((state) => state.user); 
     const primaryLight = theme.palette.primary.light;
 
+    const [text3, setText3] = useState(
+        "While The Balance will be more up to date, sometimes specific youtubers who specialize in a job can be more thorough in providing a guide in video format. The biggest issue with youtube video guides - is that they are quickly outdated. It is way harder to re-record and edit a whole 10-20 minute video than it is to edit a text section in a discord. Despite this, if you are actively learning at a time an expert releases their guide, this guide can be the best resource you find. Some standouts are Xenosys Vex for all Tank content, WeskAlber for general guides on all jobs, and many more."
+      );
+    
+    const handleText3Change = (event) => {
+        setText3(event.target.value);
+      };
+
+      const handleSaveClick = () => {
+        // You can write code here to save the updated guide text to the backend
+        console.log("Guide text saved:", text3);
+      };
+    
 
     return(
         <Box>
@@ -46,8 +61,35 @@ const JobGuidePage = () =>{
         <Typography fontWeight = "500" fontSize = "20px">
             <Link href= "https://www.youtube.com/@XenosysVex" target="blank" underline="hover" >https://www.youtube.com/@XenosysVex</Link>
         </Typography>
-        <Typography sx = {{mt: "1.5rem"}}>While The Balance will be more up to date, sometimes specific youtubers who specialize in a job can be more thorough in providing a guide in video format. The biggest issue with youtube video guides - is that they are quickly outdated. It is way harder to re-record and edit a whole 10-20 minute video than it is to edit a text section in a discord. Despite this, if you are actively learning at a time an expert releases their guide, this guide can be the best resource you find. Some standouts are Xenosys Vex for all Tank content, WeskAlber for general guides on all jobs, and many more. </Typography>
-            <Box
+    <div>
+      <Typography sx={{ mt: "1.5rem" }}>
+        While The Balance will be more up to date, sometimes specific youtubers
+        who specialize in a job can be more thorough in providing a guide in
+        video format. The biggest issue with youtube video guides - is that they
+        are quickly outdated. It is way harder to re-record and edit a whole
+        10-20 minute video than it is to edit a text section in a discord.
+        Despite this, if you are actively learning at a time an expert releases
+        their guide, this guide can be the best resource you find. Some standouts
+        are Xenosys Vex for all Tank content, WeskAlber for general guides on all
+        jobs, and many more.
+      </Typography>
+      {admin && (
+        <Typography sx={{ mt: "1.5rem" }}>
+          <TextField
+            label="Text 3"
+            multiline
+            minRows={4}
+            value={text3}
+            onChange={handleText3Change}
+            fullWidth
+          />
+          <Button variant="contained" onClick={handleSaveClick}>
+            Save
+          </Button>
+        </Typography>
+      )}
+    </div>
+        <Box
                 width = "100%"
                 padding = "2rem 6%"
                 display = {isNonMobileScreens ? "flex" : "block"}

@@ -17,6 +17,13 @@ const RelicsWidget = ({ userId, isProfile = false }) => {
     dispatch(setRelics({ relics: data }));
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${month}-${day}-${year}`;
+  };
 
   useEffect(() => {
     getRelics();
@@ -31,6 +38,7 @@ const RelicsWidget = ({ userId, isProfile = false }) => {
           userId,
           displayName,
           description,
+          createdAt
         }) => (
           <RelicWidget
             key={_id}
@@ -38,6 +46,7 @@ const RelicsWidget = ({ userId, isProfile = false }) => {
             userId={userId}
             name={`${displayName}`}
             description={description}
+            createdAt={formatDate(createdAt)}
           />
         )
       )}

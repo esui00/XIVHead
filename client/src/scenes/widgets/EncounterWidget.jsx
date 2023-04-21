@@ -19,7 +19,8 @@ const EncounterWidget = ({
   user,
   name,
   description,
-  userId // Add userId prop
+  userId,
+  createdAt
 }) => {
   const dispatch = useDispatch();
   const [encounter, setEncounter] = useState("");
@@ -50,6 +51,7 @@ const EncounterWidget = ({
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
+      <Typography>{createdAt}</Typography>
       <Divider sx={{ margin: "1.25rem 0" }} />
       <FlexBetween>
       {admin && (

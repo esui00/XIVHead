@@ -19,7 +19,8 @@ import {
     relicUserId,
     name,
     description,
-    userId
+    userId,
+    createdAt
   }) => {
     const dispatch = useDispatch();
     const [relic, setRelic] = useState("");
@@ -52,6 +53,7 @@ import {
         <Typography color={main} sx={{ mt: "1rem" }}>
           {description}
         </Typography>
+        <Typography>{createdAt}</Typography>
         <Divider sx={{ margin: "1.25rem 0" }} />
         <>
         <FlexBetween>
