@@ -21,4 +21,7 @@ Features to add if given enough time:
  - Comments need to be allowed to be deleted only if the user made it
   - Might take a lazy way out and only allow admin delete/update.
 - Email need API implementation to make sure the email is valid.
--    
+
+4/21 Updates:
+- Admin functionality
+ - Only admin can delete comments/user accounts
