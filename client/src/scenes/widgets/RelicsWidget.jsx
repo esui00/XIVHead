@@ -33,25 +33,20 @@ const RelicsWidget = ({ userId, isProfile = false }) => {
     <>
       {Array.isArray(relics) &&
         relics.map(
-        ({
-          _id,
-          userId,
-          displayName,
-          description,
-          createdAt
-        }) => (
-          <RelicWidget
-            key={_id}
-            relicId={_id}
-            userId={userId}
-            name={`${displayName}`}
-            description={description}
-            createdAt={formatDate(createdAt)}
-          />
-        )
-      )}
+          ({ _id, userId, displayName, description, createdAt }) => (
+            <RelicWidget
+              key={_id}
+              relicId={_id}
+              name={`${displayName}`}
+              description={description}
+              admin={_id.admin}
+              userId={userId}
+              createdAt={formatDate(createdAt)}
+            />
+          )
+        )}
     </>
-  ); 
+  );
 };
 
 export default RelicsWidget;

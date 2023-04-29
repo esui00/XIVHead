@@ -31,17 +31,6 @@ export const getFeedEncounters = async (req, res) => {
 };
 
 /*DELETE*/
-/*
-export const deleteEncounter = async (req, res) => {
-  try {
-    const { encounterId } = req.params;
-    const encounter = await encounter.deleteOne({ encounterId });
-    res.status(200).json(encounter);
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-
-};*/
 export const deleteEncounter = async (req, res) => {
   const { id } = req.params;
   const user = req.user;

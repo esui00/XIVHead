@@ -32,11 +32,44 @@ export const getFeedRelics = async (req, res) => {
 
 /*DELETE*/
 export const deleteRelic = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+
   try {
-    const { _id } = req.params;
-    await Relic.findOneAndDelete({ _id });
-    res.status(200).json({ message: "Relic deleted successfully" });
-  } catch (err) {
-    res.status(404).json({ message: err.message });
+    const relic = await Relic.findById(id);
+    if (!relic) return res.status(404).send("Relic not found");
+
+    // Check if the user is an admin
+const deleteRelic = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+
+  try {
+    const relic = await Relic.findById(id);
+    if (!relic) return res.status(404).send("Relic not found");
+
+    // Check if the user is an admin
+    if (user.admin === true) {
+      await relic.deleteOne();
+      return res.send("Relic deleted successfully");
+    } else {
+      return res.status(403).send("unauthorized: only admin can delete relics");
+    }
+
+    await relic.remove();
+
+    res.status(200).send("Relic deleted successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
+    await relic.remove();
+
+    res.status(200).send("Relic deleted successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
   }
 };

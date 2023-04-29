@@ -71,7 +71,7 @@ import {
             disabled={!job}
             onClick={handleJob}
             sx={{
-              color: palette.background.alt,
+              color: palette.background.main,
               backgroundColor: palette.primary.main,
               borderRadius: "3rem",
             }}
