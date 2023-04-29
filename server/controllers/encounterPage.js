@@ -30,16 +30,14 @@ export const getFeedEncounterPage = async (req, res) => {
 
 /* UPDATE */
 export const updateEncounterPage = async (req, res) => {
-  try {
-    const { encounterPageId} = req.params;
-    const {body} = req.body;
-    const encounterPage = await EncounterPage.updateOne({ encounterPageId,body });
-    res.status(200).json(encounterPage);
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-
-};
+    try {
+      const { description } = req.body;
+      const encounterPage = await EncounterPage.findOneAndUpdate({}, { description });
+      res.status(200).json(encounterPage);
+    } catch (err) {
+      res.status(404).json({ message: err.message });
+    }
+  };
 /*DELETE*/
 export const deleteEncounterPage = async (req, res) => {
   try {

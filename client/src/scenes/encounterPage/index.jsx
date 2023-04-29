@@ -8,14 +8,14 @@ import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import MyEncounterWidget from "scenes/widgets/MyEncounterWidget";
 import EncountersWidget from "scenes/widgets/EncountersWidget";
+import React, { useEffect, useState } from "react";
 
 const EncounterPage = () =>{
     const theme = useTheme();
     const navigate = useNavigate();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const {_id} = useSelector((state) => state.user); 
-    const primaryLight = theme.palette.primary.light;
-
+    const primaryLight = theme.palette.primary.light; 
 
     return(
         <Box>
