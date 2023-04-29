@@ -61,7 +61,6 @@ const JobGuidePage = () =>{
         <Typography fontWeight = "500" fontSize = "20px">
             <Link href= "https://www.youtube.com/@XenosysVex" target="blank" underline="hover" >https://www.youtube.com/@XenosysVex</Link>
         </Typography>
-    <div>
       <Typography sx={{ mt: "1.5rem" }}>
         While The Balance will be more up to date, sometimes specific youtubers
         who specialize in a job can be more thorough in providing a guide in
@@ -73,22 +72,6 @@ const JobGuidePage = () =>{
         are Xenosys Vex for all Tank content, WeskAlber for general guides on all
         jobs, and many more.
       </Typography>
-      {admin && (
-        <Typography sx={{ mt: "1.5rem" }}>
-          <TextField
-            label="Text 3"
-            multiline
-            minRows={4}
-            value={text3}
-            onChange={handleText3Change}
-            fullWidth
-          />
-          <Button variant="contained" onClick={handleSaveClick}>
-            Save
-          </Button>
-        </Typography>
-      )}
-    </div>
         <Box
                 width = "100%"
                 padding = "2rem 6%"

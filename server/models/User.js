@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema(
     admin: { 
         type: Boolean, default: false 
     },
+    suspended: {
+        type: Boolean,
+        default: false,
+      },
     },
     {timestamps:true}
 );
