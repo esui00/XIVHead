@@ -33,11 +33,10 @@ export const getFeedRelics = async (req, res) => {
 /*DELETE*/
 export const deleteRelic = async (req, res) => {
   try {
-    const { relicId } = req.params;
-    const relic = await relic.findByIdAndDelete({ relicId });
-    res.status(200).json(relic);
+    const { _id } = req.params;
+    await Relic.findOneAndDelete({ _id });
+    res.status(200).json({ message: "Relic deleted successfully" });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-
 };
