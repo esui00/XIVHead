@@ -48,16 +48,15 @@ const Form = () => {
     const isRegister = pageType === "register";
 
     const register = async (values, onSubmitProps) => {
-        const formData = new FormData();
-        for(let value in values){
-            formData.append(value,values[value])
-        }
+        
         try {
+           
             const savedUserResponse = await fetch(
                 `${mainURL}/auth/register`,
                 {
                     method: "POST",
-                    body: formData,
+                    headers: { "Content-type": "application/json" },
+                    body: JSON.stringify(values),
                 }
             );
             const savedUser = await savedUserResponse.json();

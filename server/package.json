@@ -9,6 +9,7 @@
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.4",
+    "nodemon": "^2.0.22",
     "serverless-http": "^3.2.0"
   },
   "name": "server",
@@ -17,7 +18,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.local.js"
   },
   "keywords": [],
   "author": "",

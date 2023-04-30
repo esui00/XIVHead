@@ -25,6 +25,8 @@ EntryPoints = ["app.js"]
 
 
 
+
+
 [function_build_definitions.29d9dc5c-0918-41e6-9f09-a8524da077e9]
 codeuri = "/Users/don/Desktop/XIVHead/proxy"
 runtime = "nodejs14.x"
@@ -41,6 +43,8 @@ BuildMethod = "esbuild"
 Minify = true
 Target = "es2020"
 EntryPoints = ["app.js"]
+
+
 
 
 
