@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTheme, Box, Typography, Divider } from '@mui/material';
+import { proxyURL } from 'lib/api';
+
 
 const HomePageAPI = () => {
   const [newsData, setNewsData] = useState([]);
@@ -39,7 +41,7 @@ const HomePageAPI = () => {
   useEffect(() => {
     const fetchNewsData = async () => {
       try {
-        const response = await axios.get('http://localhost:3002/feed');
+        const response = await axios.get(`${proxyURL}/feed`);
         const xmlString = response.data;
         const parser = new DOMParser();
         const xml = parser.parseFromString(xmlString, 'application/xml');

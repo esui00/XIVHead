@@ -23,6 +23,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRelics } from "state";
+import { mainURL } from "lib/api";
 
 const MyRelicWidget = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const MyRelicWidget = () => {
     formData.append("userId", _id);
     formData.append("description", relic);
 
-    const response = await fetch(`http://localhost:3001/relics`, {
+    const response = await fetch(`${mainURL}/relics`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,

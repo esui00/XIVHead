@@ -23,6 +23,7 @@ import {
   import { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { setEncounters } from "state";
+import { mainURL } from "lib/api";
   
   const MyEncounterWidget = () => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ import {
       formData.append("userId", _id);
       formData.append("description", encounter);
   
-      const response = await fetch(`http://localhost:3001/encounters`, {
+      const response = await fetch(`${mainURL}/encounters`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRelics } from "state";
 import { Link } from "react-router-dom";
+import { mainURL } from "lib/api";
 
 const RelicWidget = ({
   relicId,
@@ -31,7 +32,7 @@ const RelicWidget = ({
   const primary = palette.primary.main;
 
   const deleteRelic = async () => {
-    const response = await fetch(`http://localhost:3001/relics/delete/${relicId}`, {
+    const response = await fetch(`${mainURL}relics/delete/${relicId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

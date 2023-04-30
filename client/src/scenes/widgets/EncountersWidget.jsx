@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEncounters } from "state";
 import EncounterWidget from "./EncounterWidget.jsx";
+import { mainURL } from "lib/api.js";
 
 const EncountersWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const EncountersWidget = ({ userId, isProfile = false }) => {
   const token = useSelector((state) => state.token);
 
   const getEncounters = async () => {
-    const response = await fetch("http://localhost:3001/encounters", {
+    const response = await fetch(`${mainURL}/encounters`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

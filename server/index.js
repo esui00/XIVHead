@@ -1,13 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
-import multer from "multer";
-import helmet from "helmet";
-import morgan from "morgan";
-import path from "path";
-import { fileURLToPath } from "url";
+// import multer from "multer";
+// import helmet from "helmet";
+// import morgan from "morgan";
+import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
@@ -27,54 +24,46 @@ import Job from "./models/Relic.js";
 import Encounter from "./models/Encounter.js";
 
 /* CONFIGURATIONS */
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(morgan("common"));
+// app.use(helmet());
+// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
-/* FILE STORAGE */
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/assets");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage });
-
-/* ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
-app.post("/relics", verifyToken, upload.single("picture"), createRelic);
-app.post("/jobs", verifyToken, upload.single("picture"), createJob);
-app.post("/encounters", verifyToken, upload.single("picture"), createEncounter);
-
-/* ROUTES */
-app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
-app.use("/posts", postRoutes);
-app.use("/relics",relicRoutes);
-app.use("/jobs",jobRoutes);
-app.use("/encounters",encounterRoutes);
-
-/* MONGOOSE SETUP */
-const PORT = process.env.PORT || 6001;
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect("mongodb+srv://marcus:123@capstone.hkrtot5.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+// app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
-  })
-  .catch((error) => console.log(`${error} did not connect`));
+/* FILE STORAGE */
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "public/assets");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
+// const upload = multer({ storage });
+
+/* ROUTES WITH FILES */
+app.post("/api/auth/register",  register);
+app.post("/api/posts", verifyToken, createPost);
+app.post("/api/relics", verifyToken,  createRelic);
+app.post("/api/jobs", verifyToken,  createJob);
+app.post("/api/encounters", verifyToken, createEncounter);
+
+/* ROUTES */
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/relics",relicRoutes);
+app.use("/api/jobs",jobRoutes);
+app.use("/api/encounters",encounterRoutes);
+
+export { app };

@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "xiv"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-92hrahclxkt7"
+s3_prefix = "xiv"
+region = "us-east-1"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []

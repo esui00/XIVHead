@@ -23,6 +23,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
+import { mainURL } from "lib/api";
 
 const MyPostWidget = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const MyPostWidget = () => {
     formData.append("userId", _id);
     formData.append("description", post);
 
-    const response = await fetch(`http://localhost:3001/posts`, {
+    const response = await fetch(`${mainURL}/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 import { Link } from "react-router-dom";
+import { mainURL } from "lib/api";
 
 const PostWidget = ({
   postId,
@@ -35,7 +36,7 @@ const PostWidget = ({
 
   const deletePost = async () => {
     
-    const response = await fetch(`http://localhost:3001/posts/delete/${postId}`, {
+    const response = await fetch(`${mainURL}/posts/delete/${postId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

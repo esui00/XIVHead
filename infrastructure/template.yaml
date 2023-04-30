@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  infrastructure
+
+  Sample SAM Template for infrastructure
+
+Globals:
+    Function:
+        Timeout: 10
+        MemorySize: 3008
+        Runtime: nodejs14.x
+        Architectures:
+            - x86_64
+
+Resources:
+    XIVApiGateway:
+        Type: AWS::Serverless::Api
+        Properties:
+            Name: xiv-apigw
+            StageName: prod
+            Cors:
+                AllowMethods: "'GET,POST,OPTIONS,PUT,DELETE'"
+                AllowHeaders: "'*'"
+                AllowOrigin: "'*'"
+                # change origins later
+
+    XIVMainLambdaFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: xiv-main-lambda
+            CodeUri: ../server
+            Handler: app.handler
+            Events:
+                XIVApi:
+                    Type: Api
+                    Properties:
+                        RestApiId: !Ref XIVApiGateway
+                        Path: /api/{proxy+}
+                        Method: ANY
+        Metadata:
+            BuildMethod: esbuild
+            BuildProperties:
+                Minify: true
+                Target: "es2020"
+                EntryPoints:
+                    - app.js
+    XIVProxyLambdaFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: xiv-proxy-lambda
+            CodeUri: ../proxy
+            Handler: app.handler
+            Events:
+                XIVApi:
+                    Type: Api
+                    Properties:
+                        RestApiId: !Ref XIVApiGateway
+                        Path: /api/proxy/{proxy+}
+                        Method: ANY
+        Metadata:
+            BuildMethod: esbuild
+            BuildProperties:
+                Minify: true
+                Target: "es2020"
+                EntryPoints:
+                    - app.js
+
+Outputs:
+    BeseAPiEndpoint:
+        Description: "Base API Endpoint"
+        Value: !Sub "https://${XIVApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/api/"

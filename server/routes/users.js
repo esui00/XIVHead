@@ -2,7 +2,7 @@ import express from "express";
 import {    getUser ,deleteUser  } from "../controllers/users.js";
 import {verifyToken} from "../middleware/auth.js";
 import newUser from '../models/User.js';
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const router = express.Router();
 

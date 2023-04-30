@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRelics } from "state";
 import RelicWidget from "./RelicWidget.jsx";
+import { mainURL } from "lib/api.js";
 
 const RelicsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const RelicsWidget = ({ userId, isProfile = false }) => {
   const token = useSelector((state) => state.token);
 
   const getRelics = async () => {
-    const response = await fetch("http://localhost:3001/relics", {
+    const response = await fetch(`${mainURL}/relics`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

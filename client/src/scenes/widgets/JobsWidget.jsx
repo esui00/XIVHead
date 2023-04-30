@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setJobs } from "state";
 import JobWidget from "./JobWidget.jsx";
+import { mainURL } from "lib/api.js";
 
 const JobsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const JobsWidget = ({ userId, isProfile = false }) => {
   const token = useSelector((state) => state.token);
 
   const getJobs = async () => {
-    const response = await fetch("http://localhost:3001/jobs", {
+    const response = await fetch(`${mainURL}/jobs`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

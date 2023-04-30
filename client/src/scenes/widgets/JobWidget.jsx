@@ -13,6 +13,7 @@ import {
   import { useDispatch, useSelector } from "react-redux";
   import { setJobs } from "state";
   import { Link } from "react-router-dom";
+import { mainURL } from "lib/api";
   
   const JobWidget = ({
     jobId,
@@ -33,7 +34,7 @@ import {
   
     const deleteJob = async () => {
       
-      const response = await fetch(`http://localhost:3001/jobs/delete/${jobId}`, {
+      const response = await fetch(`${mainURL}/jobs/delete/${jobId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

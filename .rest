@@ -1,0 +1,10 @@
+POST https://6qk24xip7j.execute-api.us-east-1.amazonaws.com/prod/api/auth/register
+Content-Type: application/json
+
+{
+  "displayName": "John Doe",
+    "email": "jdoe@gmail.com",
+    "password": "123456"
+}
+### 
+GET https://6qk24xip7j.execute-api.us-east-1.amazonaws.com/prod/api/proxy/feed

@@ -23,6 +23,7 @@ import {
   import { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
   import { setJobs } from "state";
+import { mainURL } from "lib/api";
   
   const MyJobWidget = () => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ import {
       formData.append("userId", _id);
       formData.append("description", job);
   
-      const response = await fetch(`http://localhost:3001/jobs`, {
+      const response = await fetch(`${mainURL}/jobs`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

@@ -13,6 +13,7 @@ import {
 } from "@mui/icons-material";
 import { Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
+import { mainURL } from "lib/api";
 
 
 const ProfilePage = () => {
@@ -25,7 +26,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`${mainURL}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -34,7 +35,7 @@ const ProfilePage = () => {
   };
 
   const deleteUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/delete/${user._id}`, {
+    const response = await fetch(`${mainURL}/users/delete/${user._id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

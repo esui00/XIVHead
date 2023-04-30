@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEncounters } from "state";
 import { Link } from "react-router-dom";
+import { mainURL } from "lib/api";
 
 const EncounterWidget = ({
   encounterId,
@@ -31,7 +32,7 @@ const EncounterWidget = ({
   const primary = palette.primary.main;
 
   const deleteEncounter = async () => {
-    const response = await fetch(`http://localhost:3001/encounters/delete/${encounterId}`, {
+    const response = await fetch(`${mainURL}/encounters/delete/${encounterId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
