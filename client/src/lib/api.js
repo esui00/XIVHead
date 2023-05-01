@@ -1,10 +1,10 @@
 
-export const mainURL = 'http://localhost:3001/api';
-export const proxyURL = 'http://localhost:3002/api/proxy';
+export const mainURL = 'https://emzc6q6uy0.execute-api.us-east-1.amazonaws.com/prod/api/';
+export const proxyURL = 'https://emzc6q6uy0.execute-api.us-east-1.amazonaws.com/prod/api/proxy';
 
 // ----production----
 //main
-//https://6qk24xip7j.execute-api.us-east-1.amazonaws.com/prod/api 
+//https://emzc6q6uy0.execute-api.us-east-1.amazonaws.com/prod/api/
 
 //proxy 
-//https://6qk24xip7j.execute-api.us-east-1.amazonaws.com/prod/api/proxy
+//https://emzc6q6uy0.execute-api.us-east-1.amazonaws.com/prod/api/proxy
