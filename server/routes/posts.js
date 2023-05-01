@@ -10,8 +10,6 @@ router.get("/", verifyToken, getFeedPosts);
 /* DELETE */
 router.delete("/delete/:id", deletePost);
 
-/* UPDATE */
-router.put("/update/:id", updatePost);
 
 
 export default router;

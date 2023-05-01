@@ -6,5 +6,15 @@ Content-Type: application/json
     "email": "jdo@gmail.com",
     "password": "123456"
 }
+
+POST http://localhost:3001/api/encounters
+Content-Type: application/json
+
+{
+    "userId": "1234",
+    "displayName": "Ryan",
+    "description":  "Wooo"
+}
+
 ### 
 GET https://6qk24xip7j.execute-api.us-east-1.amazonaws.com/prod/api/proxy/feed

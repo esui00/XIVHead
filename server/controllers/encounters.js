@@ -3,6 +3,7 @@ import User from "../models/User.js";
 
 /* CREATE */
 export const createEncounter = async (req, res) => {
+  
   try {
     const { userId, description} = req.body;
     const user = await User.findById(userId);
