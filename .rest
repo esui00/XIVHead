@@ -17,4 +17,11 @@ Content-Type: application/json
 }
 
 ### 
-GET https://6qk24xip7j.execute-api.us-east-1.amazonaws.com/prod/api/proxy/feed
+POST http://localhost:3001/api/encounters
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "userId": "1234",
+    "description":  "Wooo"
+}

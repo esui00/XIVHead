@@ -7,6 +7,7 @@ export const createEncounter = async (req, res) => {
   try {
     const { userId, description} = req.body;
     const user = await User.findById(userId);
+    //null
     const newEncounter = new Encounter({
       userId,
       displayName: user.displayName,
@@ -17,6 +18,7 @@ export const createEncounter = async (req, res) => {
     const encounter = await Encounter.find();
     res.status(201).json(encounter);
   } catch (err) {
+    console.log(err);
     res.status(409).json({ message: err.message });
   }
 };

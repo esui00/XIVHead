@@ -36,14 +36,19 @@ const MyRelicWidget = () => {
   const medium = palette.neutral.medium;
 
   const handleRelic = async () => {
-    const formData = new FormData();
-    formData.append("userId", _id);
-    formData.append("description", relic);
+    
+    const data = {
+      userId: _id,
+      description: relic,
+    };
 
     const response = await fetch(`${mainURL}/relics`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
     const relics = await response.json();
     dispatch(setRelics({ relics }));
@@ -65,7 +70,6 @@ const MyRelicWidget = () => {
           }}
         />
       </FlexBetween>
-
 
       <FlexBetween>
         <Button

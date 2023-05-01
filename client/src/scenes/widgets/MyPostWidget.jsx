@@ -36,14 +36,18 @@ const MyPostWidget = () => {
   const medium = palette.neutral.medium;
 
   const handlePost = async () => {
-    const formData = new FormData();
-    formData.append("userId", _id);
-    formData.append("description", post);
+   const data = {
+      userId: _id,
+      description: post,
+   }
 
     const response = await fetch(`${mainURL}/posts`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
     const posts = await response.json();
     dispatch(setPosts({ posts }));
@@ -66,7 +70,6 @@ const MyPostWidget = () => {
         />
       </FlexBetween>
 
-
       <FlexBetween>
         <Button
           disabled={!post}
@@ -85,3 +88,4 @@ const MyPostWidget = () => {
 };
 
 export default MyPostWidget;
+
