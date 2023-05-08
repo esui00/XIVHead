@@ -9,6 +9,7 @@ import PostsWidget from "scenes/widgets/PostsWidget";
 import MyEncounterWidget from "scenes/widgets/MyEncounterWidget";
 import EncountersWidget from "scenes/widgets/EncountersWidget";
 import React, { useEffect, useState } from "react";
+//commit
 
 const EncounterPage = () =>{
     const theme = useTheme();

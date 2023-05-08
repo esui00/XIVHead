@@ -33,6 +33,33 @@ export const getFeedEncounters = async (req, res) => {
   }
 };
 
+/* UPDATE */
+export const updateEncounter = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+
+  try {
+    const encounter = await Encounter.findById(id);
+    if (!encounter) return res.status(404).send("Encounter not found");
+
+    // Check if the user is the owner of the encounter
+    if (encounter.userId !== user._id.toString()) {
+      return res.status(403).send("Unauthorized: You can only edit your own encounters");
+    }
+
+    const { description } = req.body;
+
+    encounter.description = description;
+
+    const updatedEncounter = await encounter.save();
+
+    res.status(200).json(updatedEncounter);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
 /*DELETE*/
 export const deleteEncounter = async (req, res) => {
   const { id } = req.params;
